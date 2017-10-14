@@ -7,6 +7,8 @@ demonizing the tidb-server
 3. Run "make"
 
 ```sh
-./tidb-server -d -store memory -P 4001
-netstat -tpln | grep 4001
+$ ./tidb-server -d -store memory -P 4001
+Running application in daemon mode 30862
+$ netstat -tpln | grep 4001
+tcp6       0      0 :::4001                 :::*                    LISTEN      30862/tidb-server
 ```
