@@ -22,15 +22,13 @@ func init() {
 
 func Daemon() {
 	if *daemon {
-		var err error
-		var cmd *exec.Cmd
 		Self, err := os.Executable()
 		if err != nil {
 			panic(err)
 		}
 		os.Args = DeleteKeyInSlice(0, os.Args)
 		os.Args = DeleteInSlice("-d", os.Args)
-		cmd = exec.Command(Self, os.Args...)
+		cmd := exec.Command(Self, os.Args...)
 		if err = cmd.Start(); err != nil {
 			panic(err)
 		}
@@ -39,22 +37,20 @@ func Daemon() {
 	}
 }
 
-func DeleteInSlice(str string, list []string) []string {
-	var newlist []string
+func DeleteInSlice(str string, list []string) (_list []string) {
 	for _, s := range list {
 		if s != str {
-			newlist = append(newlist, s)
+			_list = append(_list, s)
 		}
 	}
-	return newlist
+	return _list
 }
 
-func DeleteKeyInSlice(key int, list []string) []string {
-	var newlist []string
+func DeleteKeyInSlice(key int, list []string) (_list []string) {
 	for i, s := range list {
 		if i != key {
-			newlist = append(newlist, s)
+			_list = append(_list, s)
 		}
 	}
-	return newlist
+	return _list
 }
